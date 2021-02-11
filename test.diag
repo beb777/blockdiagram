@@ -1,0 +1,39 @@
+blockdiag{
+   A [label = "internet"] ;
+   M [label = "eth0"];
+   B [label = "firewall"] ;
+   C [label = "vpn"];
+   D [label = "en1"];
+   E [label = "en0"];
+   F [label = "vm1_DHZ"];
+   G [label = "vm2_DHZ"];
+   H [label = "vm1_LAN"];
+   I [label = "vm2_LAN"];
+   J [label = "vm3_LAN"];
+   K [label = "v_switch_DHZ"];
+   L [label = "v_switch_LAN"];
+   class switch[height = 20, width = 200];
+   L[class = "switch"];
+   K[class = "switch"];
+   A[shape = cloud]
+   B[shape = ellipse, color = "#890000"]
+   C[shape = square]
+group cloud{
+             color = "#FFFFFF";
+             A;M;
+             A -> M ;
+
+}
+M -> B;
+group proxmox{
+                B;C;D;E;F;G;H;I;J;
+                B -> C [folded];
+                C -> D ;
+                D -> L ;
+                L -> H,I,J ;
+                E -> B ;
+                E -> K;
+                K -> F, G ;
+}
+
+}
